@@ -539,8 +539,8 @@ export class MarketOperationUtils {
         };
 
         // NOTE: For sell quotes input is the taker asset and for buy quotes input is the maker asset
-        const takerAssetToEthRate = side === MarketOperation.Sell ? ethToInputRate : ethToOutputRate;
-        const makerAssetToEthRate = side === MarketOperation.Sell ? ethToOutputRate : ethToInputRate;
+        const ethToTakerAssetRate = side === MarketOperation.Sell ? ethToInputRate : ethToOutputRate;
+        const ethToMakerAssetRate = side === MarketOperation.Sell ? ethToOutputRate : ethToInputRate;
 
         // Find the unoptimized best rate to calculate savings from optimizer
         const _unoptimizedPath = fillsToSortedPaths(fills, side, inputAmount, optimizerOpts)[0];
@@ -564,8 +564,8 @@ export class MarketOperationUtils {
                 marketSideLiquidity,
                 adjustedRate: bestTwoHopRate,
                 unoptimizedPath,
-                takerAssetToEthRate,
-                makerAssetToEthRate,
+                ethToTakerAssetRate,
+                ethToMakerAssetRate,
             };
         }
 
@@ -599,8 +599,8 @@ export class MarketOperationUtils {
             marketSideLiquidity,
             adjustedRate: optimalPathRate,
             unoptimizedPath,
-            takerAssetToEthRate,
-            makerAssetToEthRate,
+            ethToTakerAssetRate,
+            ethToMakerAssetRate,
         };
     }
 

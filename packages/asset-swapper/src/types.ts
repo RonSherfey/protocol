@@ -131,7 +131,14 @@ export interface ForwarderExtensionContractOpts {
     feeRecipient: string;
 }
 
-export interface AffiliateFee {
+export enum AffiliateFeeType {
+    None,
+    PercentageFee,
+    PositiveSlippageFee,
+}
+
+export interface AffiliateFeeAmount {
+    feeType: AffiliateFeeType;
     recipient: string;
     buyTokenFeeAmount: BigNumber;
     sellTokenFeeAmount: BigNumber;
@@ -163,7 +170,7 @@ export enum ExchangeProxyRefundReceiver {
 export interface ExchangeProxyContractOpts {
     isFromETH: boolean;
     isToETH: boolean;
-    affiliateFee: AffiliateFee;
+    affiliateFee: AffiliateFeeAmount;
     refundReceiver: string | ExchangeProxyRefundReceiver;
     isMetaTransaction: boolean;
     shouldSellEntireBalance: boolean;
@@ -198,8 +205,8 @@ export interface SwapQuoteBase {
     isTwoHop: boolean;
     makerTokenDecimals: number;
     takerTokenDecimals: number;
-    takerAssetToEthRate: BigNumber;
-    makerAssetToEthRate: BigNumber;
+    ethToTakerAssetRate: BigNumber;
+    ethToMakerAssetRate: BigNumber;
 }
 
 /**

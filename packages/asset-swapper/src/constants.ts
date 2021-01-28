@@ -2,6 +2,7 @@ import { ChainId } from '@0x/contract-addresses';
 import { BigNumber, logUtils } from '@0x/utils';
 
 import {
+    AffiliateFeeType,
     ExchangeProxyContractOpts,
     ExtensionContractType,
     ForwarderExtensionContractOpts,
@@ -69,6 +70,7 @@ const DEFAULT_EXCHANGE_PROXY_EXTENSION_CONTRACT_OPTS: ExchangeProxyContractOpts 
     isFromETH: false,
     isToETH: false,
     affiliateFee: {
+        feeType: AffiliateFeeType.None,
         recipient: NULL_ADDRESS,
         buyTokenFeeAmount: ZERO_AMOUNT,
         sellTokenFeeAmount: ZERO_AMOUNT,
@@ -115,6 +117,7 @@ export {
     BRIDGE_ADDRESSES_BY_CHAIN,
     DEFAULT_FEE_SCHEDULE,
     DEFAULT_GAS_SCHEDULE,
+    POSITIVE_SLIPPAGE_FEE_TRANSFORMER_GAS,
 } from './utils/market_operation_utils/constants';
 
 export const constants = {

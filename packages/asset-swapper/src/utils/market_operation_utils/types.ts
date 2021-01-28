@@ -347,8 +347,8 @@ export interface OptimizerResult {
     marketSideLiquidity: MarketSideLiquidity;
     adjustedRate: BigNumber;
     unoptimizedPath?: CollapsedPath;
-    takerAssetToEthRate: BigNumber;
-    makerAssetToEthRate: BigNumber;
+    ethToTakerAssetRate: BigNumber;
+    ethToMakerAssetRate: BigNumber;
 }
 
 export interface OptimizerResultWithReport extends OptimizerResult {

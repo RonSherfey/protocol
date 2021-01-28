@@ -175,8 +175,8 @@ function createSwapQuote(
         quoteReport,
         sourceFlags,
         unoptimizedPath,
-        takerAssetToEthRate,
-        makerAssetToEthRate,
+        ethToTakerAssetRate,
+        ethToMakerAssetRate,
     } = optimizerResult;
     const isTwoHop = sourceFlags === SOURCE_FLAGS[ERC20BridgeSource.MultiHop];
 
@@ -210,8 +210,8 @@ function createSwapQuote(
         sourceBreakdown,
         makerTokenDecimals,
         takerTokenDecimals,
-        takerAssetToEthRate,
-        makerAssetToEthRate,
+        ethToTakerAssetRate,
+        ethToMakerAssetRate,
         quoteReport,
         isTwoHop,
     };
