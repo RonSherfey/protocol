@@ -120,8 +120,8 @@ describe('ExchangeProxySwapQuoteConsumer', () => {
                 takerAssetAmount: getRandomAmount(),
                 totalTakerAssetAmount: getRandomAmount(),
             },
-            ethToMakerAssetRate: getRandomInteger(1, 1e9),
-            ethToTakerAssetRate: getRandomInteger(1, 1e9),
+            makerAssetPriceForOneEth: getRandomInteger(1, 1e9),
+            takerAssetPriceForOneEth: getRandomInteger(1, 1e9),
             ...(side === MarketOperation.Buy
                 ? { makerAssetFillAmount: getRandomAmount() }
                 : { takerAssetFillAmount: getRandomAmount() }),
@@ -342,7 +342,7 @@ describe('ExchangeProxySwapQuoteConsumer', () => {
             );
             const bestCaseAmount = quote.bestCaseQuoteInfo.makerAssetAmount.plus(
                 POSITIVE_SLIPPAGE_FEE_TRANSFORMER_GAS.multipliedBy(quote.gasPrice).multipliedBy(
-                    quote.ethToMakerAssetRate,
+                    quote.makerAssetPriceForOneEth,
                 ),
             );
             expect(positiveSlippageFeeTransformerData).to.deep.equal({

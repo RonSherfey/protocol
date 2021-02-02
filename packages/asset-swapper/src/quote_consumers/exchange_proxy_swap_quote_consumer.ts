@@ -237,7 +237,7 @@ export class ExchangeProxySwapQuoteConsumer implements SwapQuoteConsumerBase {
             const bestCaseAmount = quote.bestCaseQuoteInfo.makerAssetAmount
                 .plus(
                     POSITIVE_SLIPPAGE_FEE_TRANSFORMER_GAS.multipliedBy(quote.gasPrice).multipliedBy(
-                        quote.ethToMakerAssetRate,
+                        quote.makerAssetPriceForOneEth,
                     ),
                 )
                 .decimalPlaces(0, BigNumber.ROUND_CEIL);
