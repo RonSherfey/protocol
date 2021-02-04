@@ -204,7 +204,7 @@ export class MarketOperationUtils {
             : Promise.resolve([]);
 
         const [
-            [tokenDecimals, orderFillableAmounts, ethToMakerAssetRate, ethToTakerAssetRate, dexQuotes, rawTwoHopQuotes],
+            [tokenDecimals, orderFillableAmounts, outputTokensPerEth, inputTokensPerEth, dexQuotes, rawTwoHopQuotes],
             rfqtIndicativeQuotes,
             offChainBalancerQuotes,
             offChainCreamQuotes,
@@ -222,8 +222,8 @@ export class MarketOperationUtils {
             dexQuotes: dexQuotes.concat([...offChainBalancerQuotes, ...offChainCreamQuotes]),
             nativeOrders,
             orderFillableAmounts,
-            ethToOutputRate: ethToMakerAssetRate,
-            ethToInputRate: ethToTakerAssetRate,
+            outputTokensPerEth,
+            inputTokensPerEth,
             rfqtIndicativeQuotes,
             twoHopQuotes,
             quoteSourceFilters,
@@ -342,8 +342,8 @@ export class MarketOperationUtils {
             dexQuotes: dexQuotes.concat(offChainBalancerQuotes, offChainCreamQuotes),
             nativeOrders,
             orderFillableAmounts,
-            ethToOutputRate: ethToTakerAssetRate,
-            ethToInputRate: ethToMakerAssetRate,
+            outputTokensPerEth: ethToTakerAssetRate,
+            inputTokensPerEth: ethToMakerAssetRate,
             rfqtIndicativeQuotes,
             twoHopQuotes,
             quoteSourceFilters,
@@ -440,7 +440,7 @@ export class MarketOperationUtils {
         const batchEthToTakerAssetRate = executeResults.splice(0, batchNativeOrders.length) as BigNumber[];
         const batchDexQuotes = executeResults.splice(0, batchNativeOrders.length) as DexSample[][][];
         const batchTokenDecimals = executeResults.splice(0, batchNativeOrders.length) as number[][];
-        const ethToInputRate = ZERO_AMOUNT;
+        const inputTokensPerEth = ZERO_AMOUNT;
 
         return Promise.all(
             batchNativeOrders.map(async (nativeOrders, i) => {
@@ -449,7 +449,7 @@ export class MarketOperationUtils {
                 }
                 const [makerToken, takerToken] = getNativeOrderTokens(nativeOrders[0]);
                 const orderFillableAmounts = batchOrderFillableAmounts[i];
-                const ethToTakerAssetRate = batchEthToTakerAssetRate[i];
+                const outputTokensPerEth = batchEthToTakerAssetRate[i];
                 const dexQuotes = batchDexQuotes[i];
                 const makerAmount = makerAmounts[i];
                 try {
@@ -460,8 +460,8 @@ export class MarketOperationUtils {
                             orderFillableAmounts,
                             dexQuotes,
                             inputAmount: makerAmount,
-                            ethToOutputRate: ethToTakerAssetRate,
-                            ethToInputRate,
+                            outputTokensPerEth,
+                            inputTokensPerEth,
                             rfqtIndicativeQuotes: [],
                             inputToken: makerToken,
                             outputToken: takerToken,
@@ -501,8 +501,8 @@ export class MarketOperationUtils {
             orderFillableAmounts,
             rfqtIndicativeQuotes,
             dexQuotes,
-            ethToOutputRate,
-            ethToInputRate,
+            outputTokensPerEth,
+            inputTokensPerEth,
         } = marketSideLiquidity;
         const maxFallbackSlippage = opts.maxFallbackSlippage || 0;
 
@@ -525,22 +525,22 @@ export class MarketOperationUtils {
             ],
             dexQuotes,
             targetInput: inputAmount,
-            ethToOutputRate,
-            ethToInputRate,
+            outputTokensPerEth,
+            inputTokensPerEth,
             excludedSources: opts.excludedSources,
             feeSchedule: opts.feeSchedule,
         });
 
         // Find the optimal path.
         const optimizerOpts = {
-            ethToOutputRate,
-            ethToInputRate,
+            outputTokensPerEth,
+            inputTokensPerEth,
             exchangeProxyOverhead: opts.exchangeProxyOverhead || (() => ZERO_AMOUNT),
         };
 
         // NOTE: For sell quotes input is the taker asset and for buy quotes input is the maker asset
-        const takerAssetPriceForOneEth = side === MarketOperation.Sell ? ethToInputRate : ethToOutputRate;
-        const makerAssetPriceForOneEth = side === MarketOperation.Sell ? ethToOutputRate : ethToInputRate;
+        const takerAssetsPerEth = side === MarketOperation.Sell ? inputTokensPerEth : outputTokensPerEth;
+        const makerAssetsPerEth = side === MarketOperation.Sell ? outputTokensPerEth : inputTokensPerEth;
 
         // Find the unoptimized best rate to calculate savings from optimizer
         const _unoptimizedPath = fillsToSortedPaths(fills, side, inputAmount, optimizerOpts)[0];
@@ -564,8 +564,8 @@ export class MarketOperationUtils {
                 marketSideLiquidity,
                 adjustedRate: bestTwoHopRate,
                 unoptimizedPath,
-                takerAssetPriceForOneEth,
-                makerAssetPriceForOneEth,
+                takerAssetsPerEth,
+                makerAssetsPerEth,
             };
         }
 
@@ -599,8 +599,8 @@ export class MarketOperationUtils {
             marketSideLiquidity,
             adjustedRate: optimalPathRate,
             unoptimizedPath,
-            takerAssetPriceForOneEth,
-            makerAssetPriceForOneEth,
+            takerAssetsPerEth,
+            makerAssetsPerEth,
         };
     }
 

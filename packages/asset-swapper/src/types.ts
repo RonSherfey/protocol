@@ -205,8 +205,8 @@ export interface SwapQuoteBase {
     isTwoHop: boolean;
     makerTokenDecimals: number;
     takerTokenDecimals: number;
-    takerAssetPriceForOneEth: BigNumber;
-    makerAssetPriceForOneEth: BigNumber;
+    takerAssetsPerEth: BigNumber;
+    makerAssetsPerEth: BigNumber;
 }
 
 /**

@@ -347,8 +347,8 @@ export interface OptimizerResult {
     marketSideLiquidity: MarketSideLiquidity;
     adjustedRate: BigNumber;
     unoptimizedPath?: CollapsedPath;
-    takerAssetPriceForOneEth: BigNumber;
-    makerAssetPriceForOneEth: BigNumber;
+    takerAssetsPerEth: BigNumber;
+    makerAssetsPerEth: BigNumber;
 }
 
 export interface OptimizerResultWithReport extends OptimizerResult {
@@ -372,8 +372,8 @@ export interface MarketSideLiquidity {
     dexQuotes: Array<Array<DexSample<FillData>>>;
     nativeOrders: SignedOrder[];
     orderFillableAmounts: BigNumber[];
-    ethToOutputRate: BigNumber;
-    ethToInputRate: BigNumber;
+    outputTokensPerEth: BigNumber;
+    inputTokensPerEth: BigNumber;
     rfqtIndicativeQuotes: V3RFQIndicativeQuote[];
     twoHopQuotes: Array<DexSample<MultiHopFillData>>;
     quoteSourceFilters: SourceFilters;

@@ -41,8 +41,8 @@ export async function getFullyFillableSwapQuoteWithNoFeesAsync(
         unoptimizedOrders: orders.map(order => ({ ...order, fills: [] })),
         sourceBreakdown: breakdown,
         isTwoHop: false,
-        takerAssetPriceForOneEth: constants.ZERO_AMOUNT,
-        makerAssetPriceForOneEth: constants.ZERO_AMOUNT,
+        takerAssetsPerEth: constants.ZERO_AMOUNT,
+        makerAssetsPerEth: constants.ZERO_AMOUNT,
     };
 
     if (operation === MarketOperation.Buy) {

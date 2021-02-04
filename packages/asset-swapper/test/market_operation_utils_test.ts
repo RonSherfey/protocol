@@ -792,8 +792,8 @@ describe('MarketOperationUtils tests', () => {
                     .returns(async () => {
                         return {
                             dexQuotes: [],
-                            ethToInputRate: Web3Wrapper.toBaseUnitAmount(1, 18),
-                            ethToOutputRate: Web3Wrapper.toBaseUnitAmount(1, 6),
+                            inputTokensPerEth: Web3Wrapper.toBaseUnitAmount(1, 18),
+                            outputTokensPerEth: Web3Wrapper.toBaseUnitAmount(1, 6),
                             inputAmount: Web3Wrapper.toBaseUnitAmount(1, 18),
                             inputToken: MAKER_TOKEN,
                             outputToken: TAKER_TOKEN,
@@ -1781,7 +1781,7 @@ describe('MarketOperationUtils tests', () => {
 
     describe('createFills', () => {
         const takerAssetAmount = new BigNumber(5000000);
-        const ethToOutputRate = new BigNumber(0.5);
+        const outputTokensPerEth = new BigNumber(0.5);
         // tslint:disable-next-line:no-object-literal-type-assertion
         const smallOrder = {
             chainId: 1,
@@ -1818,7 +1818,7 @@ describe('MarketOperationUtils tests', () => {
                 orders,
                 dexQuotes: [],
                 targetInput: takerAssetAmount.minus(1),
-                ethToOutputRate,
+                outputTokensPerEth,
                 feeSchedule,
             });
             expect((path[0][0].fillData as NativeFillData).order.makerAddress).to.eq(smallOrder.makerAddress);
@@ -1831,7 +1831,7 @@ describe('MarketOperationUtils tests', () => {
                 orders,
                 dexQuotes: [],
                 targetInput: POSITIVE_INF,
-                ethToOutputRate,
+                outputTokensPerEth,
                 feeSchedule,
             });
             expect((path[0][0].fillData as NativeFillData).order.makerAddress).to.eq(largeOrder.makerAddress);
