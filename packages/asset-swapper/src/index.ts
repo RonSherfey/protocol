@@ -88,6 +88,7 @@ export { getSwapMinBuyAmount, getQuoteInfoMinBuyAmount } from './quote_consumers
 export { SwapQuoter } from './swap_quoter';
 export {
     AffiliateFeeAmount,
+    AffiliateFeeType,
     AssetSwapperContractAddresses,
     CalldataInfo,
     ExchangeProxyContractOpts,
