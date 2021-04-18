@@ -64,7 +64,7 @@
     },
     "dependencies": {
         "@0x/base-contract": "^6.2.18",
-        "@types/node": "12.12.54"
+        "@types/node": "12.20.6"
     },
     "publishConfig": {
         "access": "public"
