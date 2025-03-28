@@ -12007,8 +12007,8 @@ tape@~2.3.2:
     through "~2.3.4"
 
 tar-fs@^1.15.3:
-  version "1.16.3"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-1.16.3.tgz#966a628841da2c4010406a82167cbd5e0c72d509"
+  version "1.16.4"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-1.16.4.tgz#d3f0e1edf164b821f086640b1f0596f004021dc8"
   dependencies:
     chownr "^1.0.1"
     mkdirp "^0.5.1"
@@ -12016,13 +12016,13 @@ tar-fs@^1.15.3:
     tar-stream "^1.1.2"
 
 tar-fs@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.0.tgz#d1cdd121ab465ee0eb9ccde2d35049d3f3daf0d5"
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.2.tgz#425f154f3404cb16cb8ff6e671d45ab2ed9596c5"
   dependencies:
     chownr "^1.1.1"
     mkdirp-classic "^0.5.2"
     pump "^3.0.0"
-    tar-stream "^2.0.0"
+    tar-stream "^2.1.4"
 
 tar-stream@^1.1.2, tar-stream@^1.5.2:
   version "1.6.2"
@@ -12036,9 +12036,9 @@ tar-stream@^1.1.2, tar-stream@^1.5.2:
     to-buffer "^1.1.1"
     xtend "^4.0.0"
 
-tar-stream@^2.0.0:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-2.1.4.tgz#c4fb1a11eb0da29b893a5b25476397ba2d053bfa"
+tar-stream@^2.1.4:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-2.2.0.tgz#acad84c284136b060dc3faa64474aa9aebd77287"
   dependencies:
     bl "^4.0.3"
     end-of-stream "^1.4.1"
