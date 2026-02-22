@@ -82,7 +82,7 @@
         "@0x/base-contract": "^6.2.18",
         "@0x/typescript-typings": "^5.1.6",
         "@0x/utils": "^6.2.0",
-        "bn.js": "^4.11.8",
+        "bn.js": "^5.2.3",
         "ethereum-types": "^3.4.0"
     },
     "publishConfig": {
